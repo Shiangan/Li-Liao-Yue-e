@@ -1267,96 +1267,115 @@ document.querySelectorAll(".gallery-img").forEach(img => {
     </div>
   </div>
 
-       <hr class="sep">
-
-    <!-- 🔹參加喪禮注意事項區塊 -->
-<div class="funeral-notice">
-  <h4 class="section-title" style="margin-top:0">🕯️ 參加喪禮注意事項（國曆 2024.11.10）</h4>
-  <p class="small"><strong>當日正沖：</strong> 民國86年次（屬牛）。</p>
-  <ul class="small">
+       <!-- 🔹 參加喪禮注意事項（最完善完整版） -->
+<section id="funeral-notice">
+  <h4 class="notice-title">
+    🕯️ 提醒<br>
+    出殯日：國曆 114.11.10（一）
+    當日正沖：民國86年次 肖牛
+  </h4>
+  <ul class="notice-list">
     <li>請來賓著整齊、樸素深色服裝，以示尊重。</li>
     <li>建議提前抵達會場，並配合會場秩序與指示人員安排。</li>
     <li>入場前請將手機調為靜音或關機，避免影響儀式進行。</li>
     <li>儀式中請依工作人員指引，依序行禮或致意。</li>
-    <li>若欲致贈花籃或奠儀，請先與陳先生聯繫。</li>
+    <li>統一致贈花籃，請聯繫禮儀師，陳柏元先生：
+      <span class="contact-buttons">
+        <a href="tel:0938179858" class="contact-btn phone">📞 0938-179-858</a>
+        <a href="https://line.me/ti/p/~0938179858" class="contact-btn line">💬 LINE 聯繫</a>
+      </span>
+    </li>
   </ul>
-</div>
+</section>
 
-<!-- 🔸CSS樣式（柔和金米色風格） -->
 <style>
-.funeral-notice {
-  background: #faf8f4;
-  border: 1px solid #e2d5b8;
-  border-radius: 12px;
-  padding: 25px 28px;
+/* 基本區塊 */
+#funeral-notice {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 36px 38px;
+  max-width: 950px;
   margin: 40px auto;
-  max-width: 850px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  font-family: "Noto Sans TC", "微軟正黑體", sans-serif;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  font-family: "Iansui", "Noto Sans TC", "微軟正黑體", sans-serif;
+  color: #333;
 }
 
-.funeral-notice .section-title {
-  font-size: 1.4rem;
-  color: #3e3e3e;
+/* 標題分兩行並置中 */
+#funeral-notice .notice-title {
+  font-size: clamp(1.6rem, 2.2vw, 2rem);
+  color: #222;
   text-align: center;
-  margin-bottom: 15px;
-  letter-spacing: 1px;
-  position: relative;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #c49b57; /* 金色底線 */
+  padding-bottom: 8px;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
 }
 
-.funeral-notice .section-title::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 2px;
-  background: #c49b57;
-  margin: 10px auto 0;
-  border-radius: 2px;
-}
-
-.funeral-notice p.small {
-  text-align: center;
-  color: #5a4c3b;
-  font-size: 1rem;
-  margin-bottom: 15px;
-}
-
-.funeral-notice ul {
+/* 列表 */
+#funeral-notice .notice-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.funeral-notice ul li {
-  background: #fffefb;
-  border-left: 4px solid #c49b57;
-  margin-bottom: 10px;
-  padding: 10px 15px;
-  border-radius: 6px;
-  color: #3f3f3f;
-  line-height: 1.8;
-  font-size: 0.95rem;
-  transition: background 0.3s ease;
+#funeral-notice .notice-list li {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.9;
+  margin-bottom: 14px;
+  display: block;
+  width: 100%;
+  white-space: normal;        /* 桌機單行，窄螢幕自動換行 */
+  overflow-wrap: break-word;
+  text-indent: 0;
+  position: relative;
+  padding-left: 26px;          /* 為符號留空間 */
 }
 
-.funeral-notice ul li:hover {
-  background: #f5f0e7;
+#funeral-notice .notice-list li::before {
+  content: "🔹";
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
-/* 🔹響應式設計 */
+/* 聯絡按鈕 */
+.contact-buttons {
+  display: inline-flex;
+  gap: 12px;
+  margin-left: 5px;
+  flex-wrap: wrap;
+}
+
+.contact-btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.97rem;
+  transition: all 0.25s ease;
+  color: #fff;
+  letter-spacing: 0.5px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.contact-btn.phone { background: linear-gradient(135deg, #6a9cfb, #3571d3); }
+.contact-btn.phone:hover { background: linear-gradient(135deg, #4e7fd1, #2750a8); transform: translateY(-1px); }
+
+.contact-btn.line { background: linear-gradient(135deg, #00c300, #008f00); }
+.contact-btn.line:hover { background: linear-gradient(135deg, #00a800, #006f00); transform: translateY(-1px); }
+
+/* 響應式 */
 @media (max-width: 768px) {
-  .funeral-notice {
-    padding: 20px 18px;
-  }
-  .funeral-notice .section-title {
-    font-size: 1.2rem;
-  }
-  .funeral-notice ul li {
-    font-size: 0.9rem;
-  }
+  #funeral-notice { padding: 28px 18px; }
+  #funeral-notice .notice-title { font-size: clamp(1.4rem, 4vw, 1.7rem); }
+  #funeral-notice .notice-list li { font-size: clamp(0.95rem, 3.5vw, 1rem); }
+  .contact-buttons { flex-direction: column; gap: 6px; }
+  .contact-btn { font-size: 0.95rem; padding: 6px 12px; }
 }
 </style>
-
 
 
 <!-- 页脚 -->
