@@ -781,242 +781,147 @@ document.addEventListener("DOMContentLoaded", () => {
   <img src="image/未命名設計.png" alt="名片" class="business-card-img" loading="lazy">
 </section>
 
-<!<!-- 分享按鈕區 -->
+<!-- 分享按鈕區 -->
 <section id="share-buttons">
   <h2><strong>分享此頁面</strong></h2>
   <div class="share-btns">
-    <!-- Facebook -->
-    <a href="#" target="_blank" class="share-btn fb-share-btn" aria-label="Share on Facebook">
+    <!-- Facebook 分享按钮 -->
+    <a href="#"
+       target="_blank"
+       class="share-btn fb-share-btn"
+       aria-label="Share on Facebook">
       <img src="image/fb.png" alt="Share on Facebook" loading="lazy">
     </a>
-
-    <!-- LINE -->
-    <a href="#" target="_blank" class="share-btn line-share-btn" aria-label="Share on Line">
+    <!-- Line 分享按钮 -->
+    <a href="#"
+       target="_blank"
+       class="share-btn line-share-btn"
+       aria-label="Share on Line">
       <img src="image/line.png" alt="Share on Line" loading="lazy">
     </a>
-
-    <!-- 複製連結 -->
-    <button class="share-btn copy-link-btn" aria-label="Copy link">
-      <img src="image/link.png" alt="Copy link" loading="lazy">
-    </button>
-
-    <!-- QR Code -->
-    <button class="share-btn qr-btn" aria-label="Show QR Code">
-      <img src="image/qr.png" alt="QR Code" loading="lazy">
-    </button>
   </div>
 </section>
 
-<!-- QR Code 視窗 -->
-<div id="qr-modal">
-  <div class="qr-box">
-    <canvas id="qr-canvas"></canvas>
-    <p>📱 掃描 QR Code 分享此頁</p>
-  </div>
-</div>
+<!-- 名片區 -->
+<section id="business-card">
+  <img src="image/名片.png" alt="名片" class="business-card-img" loading="lazy">
+</section>
 
-<!-- 複製提示 -->
-<div id="toast">已複製連結！</div>
+<style>
+/* 分享區塊響應式設計 */
+#share-buttons {
+  text-align: center;
+  margin: 30px 0;
+}
+#share-buttons h2 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+.share-btns {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.share-btn img {
+  width: 50px;
+  height: 50px;
+  transition: transform 0.2s ease;
+}
+.share-btn img:hover {
+  transform: scale(1.1);
+}
 
-<!-- QRCode 套件 -->
-<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+/* 名片圖片響應式 */
+.business-card-img {
+  display: block;
+  max-width: 90%;
+  height: auto;
+  margin: 20px auto;
+  border-radius: 10px;
+  cursor: zoom-in;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 小螢幕調整 */
+@media (max-width: 600px) {
+  #share-buttons h2 {
+    font-size: 1.2rem;
+  }
+  .share-btn img {
+    width: 45px;
+    height: 45px;
+  }
+}
+</style>
 
 <script>
-"use strict";
 document.addEventListener("DOMContentLoaded", function () {
-  // --- 1️⃣ 處理網址 ---
-  let url = new URL(window.location.href);
-  ["fbclid", "utm_source", "utm_medium", "utm_campaign"].forEach(p => url.searchParams.delete(p));
+  // 取得目前網址
+  var url = new URL(window.location.href);
 
+  // 刪除追蹤參數
+  url.searchParams.delete("fbclid");
+  url.searchParams.delete("utm_source");
+  url.searchParams.delete("utm_medium");
+  url.searchParams.delete("utm_campaign");
+
+  // Punycode 處理
   if (url.hostname.includes("xn--")) {
-    try {
-      url.hostname = decodeURIComponent(url.hostname);
-    } catch (e) {
-      url.hostname = "24hour.台灣";
-    }
+    url.hostname = "24hour.台灣";
   }
 
-  const encodedUrl = encodeURIComponent(url.toString());
+  // 編碼 URL
+  var encodedUrl = encodeURIComponent(url.toString());
 
-  // --- 2️⃣ 分享功能 ---
-  const fbBtn = document.querySelector(".fb-share-btn");
-  if (fbBtn) fbBtn.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodedUrl;
-
-  const lineBtn = document.querySelector(".line-share-btn");
-  if (lineBtn) lineBtn.href = "https://social-plugins.line.me/lineit/share?url=" + encodedUrl;
-
-  const copyBtn = document.querySelector(".copy-link-btn");
-  const toast = document.getElementById("toast");
-  if (copyBtn) {
-    copyBtn.addEventListener("click", () => {
-      navigator.clipboard.writeText(url.toString()).then(() => {
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 1800);
-      });
-    });
+  // Facebook 分享
+  var fbShareLink = document.querySelector(".fb-share-btn");
+  if (fbShareLink) {
+    fbShareLink.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodedUrl;
   }
 
-  const qrBtn = document.querySelector(".qr-btn");
-  const qrModal = document.getElementById("qr-modal");
-  const qrCanvas = document.getElementById("qr-canvas");
-
-  if (qrBtn && qrModal && qrCanvas) {
-    qrBtn.addEventListener("click", () => {
-      qrModal.classList.add("show");
-      QRCode.toCanvas(qrCanvas, url.toString(), { width: 220 });
-      document.body.style.overflow = "hidden";
-    });
-
-    qrModal.addEventListener("click", () => {
-      qrModal.classList.remove("show");
-      document.body.style.overflow = "";
-    });
+  // LINE 分享
+  var lineShareLink = document.querySelector(".line-share-btn");
+  if (lineShareLink) {
+    lineShareLink.href = "https://line.me/R/msg/text/?" + encodedUrl;
   }
 
-  // --- 3️⃣ 名片圖片放大功能 ---
+  // 🔍 名片點擊放大功能
   const cardImg = document.querySelector(".business-card-img");
   if (cardImg) {
     cardImg.addEventListener("click", function () {
       const modal = document.createElement("div");
-      Object.assign(modal.style, {
-        position: "fixed",
-        top: "0",
-        left: "0",
-        width: "100vw",
-        height: "100vh",
-        backgroundColor: "rgba(0, 0, 0, 0.8)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: "3000",
-        cursor: "zoom-out",
-      });
+      modal.style.position = "fixed";
+      modal.style.top = "0";
+      modal.style.left = "0";
+      modal.style.width = "100vw";
+      modal.style.height = "100vh";
+      modal.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+      modal.style.display = "flex";
+      modal.style.alignItems = "center";
+      modal.style.justifyContent = "center";
+      modal.style.zIndex = "1000";
 
       const img = document.createElement("img");
       img.src = cardImg.src;
       img.alt = cardImg.alt;
-      Object.assign(img.style, {
-        maxWidth: "90%",
-        maxHeight: "90%",
-        borderRadius: "10px",
-        boxShadow: "0 4px 8px rgba(0,0,0,0.5)",
-        cursor: "default",
-        transition: "transform 0.3s ease",
-      });
+      img.style.maxWidth = "90%";
+      img.style.maxHeight = "90%";
+      img.style.borderRadius = "10px";
+      img.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.5)";
+      img.style.cursor = "pointer";
 
       modal.appendChild(img);
       document.body.appendChild(modal);
-      document.body.style.overflow = "hidden";
 
+      // 點擊模態框或圖片關閉
       modal.addEventListener("click", function () {
         document.body.removeChild(modal);
-        document.body.style.overflow = "";
       });
     });
   }
 });
 </script>
-
-<style>
-/* ===== 分享按鈕區 ===== */
-#share-buttons {
-  text-align: center;
-  margin: 2em auto;
-  padding: 1em;
-  max-width: 600px;
-}
-.share-btns {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1em;
-}
-.share-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  padding: 0;
-}
-.share-btn img {
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
-}
-.share-btn:hover {
-  transform: scale(1.1);
-  opacity: 0.9;
-}
-
-/* ===== QR Code 視窗 ===== */
-#qr-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 2000;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(4px);
-  transition: opacity 0.3s ease;
-}
-#qr-modal.show {
-  display: flex;
-}
-.qr-box {
-  background: #fff;
-  padding: 20px 25px;
-  border-radius: 14px;
-  text-align: center;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-}
-.qr-box p {
-  margin-top: 10px;
-  font-size: 16px;
-  color: #333;
-}
-
-/* ===== 提示訊息 ===== */
-#toast {
-  visibility: hidden;
-  min-width: 160px;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  text-align: center;
-  border-radius: 8px;
-  padding: 10px;
-  position: fixed;
-  left: 50%;
-  bottom: 60px;
-  transform: translateX(-50%);
-  font-size: 15px;
-  z-index: 4000;
-  opacity: 0;
-  transition: opacity 0.4s, visibility 0.4s;
-}
-#toast.show {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* ===== 響應式 ===== */
-@media (max-width: 480px) {
-  #share-buttons h2 {
-    font-size: 18px;
-  }
-  .share-btn img {
-    width: 44px;
-    height: 44px;
-  }
-  .qr-box {
-    padding: 15px;
-  }
-  #toast {
-    font-size: 14px;
-    bottom: 40px;
-  }
-}
-</style>
        
 
         
