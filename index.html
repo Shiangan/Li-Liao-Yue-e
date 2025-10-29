@@ -807,7 +807,7 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </section>
 
-<!-- QR Code Modal -->
+<!-- QR Code 視窗 -->
 <div id="qr-modal">
   <div class="qr-box">
     <canvas id="qr-canvas"></canvas>
@@ -824,6 +824,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
 "use strict";
 document.addEventListener("DOMContentLoaded", function () {
+  // --- 1️⃣ 處理網址 ---
   let url = new URL(window.location.href);
   ["fbclid", "utm_source", "utm_medium", "utm_campaign"].forEach(p => url.searchParams.delete(p));
 
@@ -837,15 +838,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const encodedUrl = encodeURIComponent(url.toString());
 
-  // Facebook
+  // --- 2️⃣ 分享功能 ---
   const fbBtn = document.querySelector(".fb-share-btn");
   if (fbBtn) fbBtn.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodedUrl;
 
-  // LINE
   const lineBtn = document.querySelector(".line-share-btn");
   if (lineBtn) lineBtn.href = "https://social-plugins.line.me/lineit/share?url=" + encodedUrl;
 
-  // 複製連結
   const copyBtn = document.querySelector(".copy-link-btn");
   const toast = document.getElementById("toast");
   if (copyBtn) {
@@ -857,7 +856,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // QR Code
   const qrBtn = document.querySelector(".qr-btn");
   const qrModal = document.getElementById("qr-modal");
   const qrCanvas = document.getElementById("qr-canvas");
@@ -874,25 +872,65 @@ document.addEventListener("DOMContentLoaded", function () {
       document.body.style.overflow = "";
     });
   }
+
+  // --- 3️⃣ 名片圖片放大功能 ---
+  const cardImg = document.querySelector(".business-card-img");
+  if (cardImg) {
+    cardImg.addEventListener("click", function () {
+      const modal = document.createElement("div");
+      Object.assign(modal.style, {
+        position: "fixed",
+        top: "0",
+        left: "0",
+        width: "100vw",
+        height: "100vh",
+        backgroundColor: "rgba(0, 0, 0, 0.8)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: "3000",
+        cursor: "zoom-out",
+      });
+
+      const img = document.createElement("img");
+      img.src = cardImg.src;
+      img.alt = cardImg.alt;
+      Object.assign(img.style, {
+        maxWidth: "90%",
+        maxHeight: "90%",
+        borderRadius: "10px",
+        boxShadow: "0 4px 8px rgba(0,0,0,0.5)",
+        cursor: "default",
+        transition: "transform 0.3s ease",
+      });
+
+      modal.appendChild(img);
+      document.body.appendChild(modal);
+      document.body.style.overflow = "hidden";
+
+      modal.addEventListener("click", function () {
+        document.body.removeChild(modal);
+        document.body.style.overflow = "";
+      });
+    });
+  }
 });
 </script>
 
 <style>
-/* ====== 分享區塊樣式 ====== */
+/* ===== 分享按鈕區 ===== */
 #share-buttons {
   text-align: center;
   margin: 2em auto;
   padding: 1em;
   max-width: 600px;
 }
-
 .share-btns {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 1em;
 }
-
 .share-btn {
   background: none;
   border: none;
@@ -900,19 +938,17 @@ document.addEventListener("DOMContentLoaded", function () {
   transition: transform 0.2s ease, opacity 0.2s ease;
   padding: 0;
 }
-
 .share-btn img {
   width: 52px;
   height: 52px;
   border-radius: 12px;
 }
-
 .share-btn:hover {
   transform: scale(1.1);
   opacity: 0.9;
 }
 
-/* ====== QR Code 視窗 ====== */
+/* ===== QR Code 視窗 ===== */
 #qr-modal {
   display: none;
   position: fixed;
@@ -924,11 +960,9 @@ document.addEventListener("DOMContentLoaded", function () {
   backdrop-filter: blur(4px);
   transition: opacity 0.3s ease;
 }
-
 #qr-modal.show {
   display: flex;
 }
-
 .qr-box {
   background: #fff;
   padding: 20px 25px;
@@ -936,14 +970,13 @@ document.addEventListener("DOMContentLoaded", function () {
   text-align: center;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
-
 .qr-box p {
   margin-top: 10px;
   font-size: 16px;
   color: #333;
 }
 
-/* ====== 提示訊息 ====== */
+/* ===== 提示訊息 ===== */
 #toast {
   visibility: hidden;
   min-width: 160px;
@@ -957,102 +990,31 @@ document.addEventListener("DOMContentLoaded", function () {
   bottom: 60px;
   transform: translateX(-50%);
   font-size: 15px;
-  z-index: 3000;
+  z-index: 4000;
   opacity: 0;
   transition: opacity 0.4s, visibility 0.4s;
 }
-
 #toast.show {
   visibility: visible;
   opacity: 1;
 }
 
-/* ====== 響應式設計 ====== */
+/* ===== 響應式 ===== */
 @media (max-width: 480px) {
   #share-buttons h2 {
     font-size: 18px;
   }
-
   .share-btn img {
     width: 44px;
     height: 44px;
   }
-
   .qr-box {
     padding: 15px;
   }
-
   #toast {
     font-size: 14px;
     bottom: 40px;
   }
-}
-</style>
-    
-    <style>
-:root {
-    --primary-bg-color: #f9f9f9;
-    --title-color: #333;
-    --subtitle-color: #666;
-    --image-border-radius: 10px;
-    --hover-scale: 1.05;
-    --transition-duration: 0.3s;
-    --box-shadow: rgba(0, 0, 0, 0.1) 0 6px 12px;
-}
-
-/* 整體容器 */
-.transport-info {
-    padding: 20px;
-    background-color: var(--primary-bg-color);
-    border-radius: var(--image-border-radius);
-    margin-top: 20px;
-    text-align: center;
-    box-shadow: var(--box-shadow);
-}
-
-/* 標題樣式 */
-.title {
-    font-family: '辰魚落雁體', sans-serif;
-    color: var(--title-color);
-    font-size: 24px;
-    margin-bottom: 15px;
-}
-
-/* 副標題樣式 */
-.subtitle {
-    font-family: 'Iansui', 'Noto Serif TC', serif; /* 先套用芫荽體，備援 Noto Serif TC */
-    color: var(--subtitle-color);
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-
-/* 圖片畫廊 */
-.image-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    justify-items: center;
-}
-
-/* 圖片樣式 */
-.gallery-img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--image-border-radius);
-    transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
-}
-
-/* 懸停效果 */
-.gallery-img:hover {
-    transform: scale(var(--hover-scale));
-    box-shadow: var(--box-shadow);
-}
-
-/* 響應式設計：圖片調整 */
-@media (max-width: 600px) {
-    .gallery-img {
-        width: 90%;
-    }
 }
 </style>
        
