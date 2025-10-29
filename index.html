@@ -1026,24 +1026,153 @@ document.addEventListener("DOMContentLoaded", function () {
 <section id="transport-info" class="transport-section">
   <h2><strong>交通資訊</strong></h2>
 
-  <!-- 基本交通文字資訊 -->
+  <!-- 🔹交通資訊區塊（最完整版本） -->
+<section id="transport-section">
+  <h2 class="section-title">交通資訊</h2>
+
   <div class="transport-details">
+    <!-- 地點資訊 -->
     <div class="transport-item">
       <h3>📍 桃園市立殯儀館</h3>
       <p><strong>地址：</strong>桃園市桃園區大有路920號</p>
     </div>
+
+    <!-- 自行開車 -->
     <div class="transport-item">
-      <h4>🚍 公車資訊</h4>
-      <p><strong>新海橋頭站：</strong>658、857、橘5</p>
-      <p><strong>新海抽水站：</strong>810、786</p>
-      <p>🧍‍♂️ 步行約 3 分鐘即可到達</p>
+      <h4>🚗 自行開車</h4>
+      <p><strong>中山高速公路（南崁交流道）：</strong> 從南崁交流道下，往桃園市區方向沿春日路行駛，過家樂福後，在第三個紅綠燈左轉進入健行路，直行即可抵達。</p>
+      <p><strong>中山高速公路（南桃園交流道）：</strong> 從南桃園交流道下，往中壢方向行駛大興西路，轉大興路至大有路後左轉，續行約500公尺至善街即可到達。</p>
     </div>
+
+    <!-- 公車資訊 -->
     <div class="transport-item">
+      <h4>🚍 大眾運輸</h4>
+
+      <p><strong>公車（市立殯儀館站）：</strong><br>
+      搭乘桃園客運105號、220號（環狀紅線）或707號公車，可直達大門口。<br>
+      亦可搭乘桃園客運105或707（含支線）在市立殯儀館站下車。</p>
+
+      <p><strong>公車（公園都市站）：</strong><br>
+      搭乘桃園客運302號或統聯客運168號公車，在公園都市站下車，步行約10分鐘可達。</p>
+
+      <p><strong>公車（春日路、健行路口站）：</strong><br>
+      搭乘桃園客運5014、5014A、5022、5022A、5071、711號公車，在春日路、健行路口站下車後步行約20分鐘。</p>
+    </div>
+
+    <!-- Google 地圖嵌入 -->
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.369484357482!2d121.31461389999998!3d25.021532099999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34681e361ce9b9c7%3A0xb4c3029db3d7b0b2!2sTaoyuan%20Office%20of%20Funeral%20Services!5e0!3m2!1sen!2stw!4v1761640937452!5m2!1sen!2stw"
+        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+    <!-- 開啟 Google 地圖按鈕 -->
+    <div class="transport-item map-btn">
       <a class="map-link" href="https://maps.app.goo.gl/giYbFyLcMZkBiTjt8" target="_blank">
-  ➤ 點我開啟 Google 地圖
-</a>
+        ➤ 點我開啟 Google 地圖導航
+      </a>
     </div>
   </div>
+</section>
+
+<!-- 🔸交通資訊樣式設計 -->
+<style>
+#transport-section {
+  background: #fdfdfd;
+  border-radius: 12px;
+  padding: 40px 25px;
+  margin: 50px auto;
+  max-width: 950px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: "Noto Sans TC", "微軟正黑體", sans-serif;
+}
+
+#transport-section .section-title {
+  font-size: 1.9rem;
+  text-align: center;
+  color: #222;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+#transport-section .section-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: #005bb5;
+  margin: 10px auto 0;
+  border-radius: 3px;
+}
+
+.transport-details {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.transport-item h3,
+.transport-item h4 {
+  color: #003366;
+  margin-bottom: 10px;
+}
+
+.transport-item p {
+  color: #444;
+  line-height: 1.8;
+  margin: 5px 0;
+  font-size: 1rem;
+  text-align: justify;
+}
+
+.map-container {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.map-btn {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.map-link {
+  display: inline-block;
+  background: #0078d7;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 22px;
+  border-radius: 6px;
+  transition: background 0.3s, transform 0.2s;
+  font-weight: 600;
+}
+
+.map-link:hover {
+  background: #005ea3;
+  transform: translateY(-2px);
+}
+
+/* 🔹響應式設定 */
+@media (max-width: 768px) {
+  #transport-section {
+    padding: 30px 18px;
+  }
+  .section-title {
+    font-size: 1.6rem;
+  }
+  .transport-item p {
+    font-size: 0.96rem;
+  }
+  .map-container iframe {
+    height: 260px;
+  }
+}
+</style>
 
   <!-- 圖片展示區 -->
   <div class="transport-image-area">
@@ -1051,7 +1180,8 @@ document.addEventListener("DOMContentLoaded", function () {
     <p class="subtitle">點擊圖片可放大查看</p>
     <div class="image-gallery">
       <img src="image/IMG_0133.jpeg" alt="殯儀館資訊" class="gallery-img" loading="lazy">
-      <img src="image/IMG_0134.jpeg" alt="停車地圖" class="gallery-img" loading="lazy">
+      <img src="image/IMG_0157.jpeg" alt="地圖" class="gallery-img" loading="lazy">
+      <img src="image/IMG_0160.jpeg" alt="停車資訊" class="gallery-img" loading="lazy">
     </div>
   </div>
 </section>
