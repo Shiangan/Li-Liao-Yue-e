@@ -554,188 +554,197 @@ document.addEventListener("DOMContentLoaded", () => {
         </script>
 
 <!-- 致贈花籃部分 -->
+<!-- 🌸 致贈花籃區 -->
 <section id="donate-flower">
   <h3><strong>統一致贈花籃，送上祝福</strong></h3>
-  <p><strong>選擇花籃樣式，點選以下LINE與我們聯繫。</strong></p>
+  <p>請選擇花籃樣式，點擊下方按鈕透過 LINE 聯繫我們。</p>
 
-  <a href="https://line.me/ti/p/nZJmE8-b6X" target="_blank" class="btn-order"><strong>加入 LINE 訂購</strong></a><br>
-  <a href="javascript:void(0);" id="show-flower-baskets" class="btn"><strong>顯示花籃樣式 🌹</strong></a>
+  <a href="https://line.me/ti/p/nZJmE8-b6X" target="_blank" class="btn-order">
+    💬 加入 LINE 訂購
+  </a><br>
+  <button id="show-flower-baskets" class="btn">
+    🌹 顯示花籃樣式
+  </button>
 </section>
 
-<!-- 花籃畫廊 -->
-<div id="flower-basket-gallery" style="display: none;">
-  <div class="zoomable">
-    <img src="image/花籃A款.JPG" alt="花籃A" loading="lazy">
-    <p class="price"><strong>A款NT$2,500/對</strong></p>
-  </div>
-  <div class="zoomable">
-    <img src="image/花籃B款.JPG" alt="花籃B" loading="lazy">
-    <p class="price"><strong>B款NT$3,000/對</strong></p>
-  </div>
-  <div class="zoomable">
-    <img src="image/花籃C款.JPG" alt="花籃C" loading="lazy">
-    <p class="price"><strong>C款NT$3,500/對</strong></p>
-  </div>
-  <div class="zoomable">
-    <img src="image/花籃D款.JPG" alt="花籃D" loading="lazy">
-    <p class="price"><strong>D款NT$4,500/對</strong></p>
-  </div>
-  <div class="zoomable">
-    <img src="image/花籃E款.JPG" alt="花籃E" loading="lazy">
-    <p class="price"><strong>E款NT$5,000/對</strong></p>
-  </div>
-  <div class="zoomable">
-    <img src="image/花籃F款.JPG" alt="花籃F" loading="lazy">
-    <p class="price"><strong>F款NT$5,500/對</strong></p>
-  </div>
-  <div class="zoomable">
-    <img src="image/花籃G款.JPG" alt="花籃G" loading="lazy">
-    <p class="price"><strong>G款NT$6,000/對</strong></p>
-  </div>
-  <div class="zoomable">
-    <img src="image/花籃H款.JPG" alt="花籃H" loading="lazy">
-    <p class="price"><strong>H款NT$6,500/對</strong></p>
-  </div>
+<!-- 🌸 花籃畫廊 -->
+<div id="flower-basket-gallery" class="hidden">
+  <div class="zoomable"><img src="image/花籃A款.JPG" alt="花籃A"><p>A款 NT$2,500 / 對</p></div>
+  <div class="zoomable"><img src="image/花籃B款.JPG" alt="花籃B"><p>B款 NT$3,000 / 對</p></div>
+  <div class="zoomable"><img src="image/花籃C款.JPG" alt="花籃C"><p>C款 NT$3,500 / 對</p></div>
+  <div class="zoomable"><img src="image/花籃D款.JPG" alt="花籃D"><p>D款 NT$4,500 / 對</p></div>
+  <div class="zoomable"><img src="image/花籃E款.JPG" alt="花籃E"><p>E款 NT$5,000 / 對</p></div>
+  <div class="zoomable"><img src="image/花籃F款.JPG" alt="花籃F"><p>F款 NT$5,500 / 對</p></div>
+  <div class="zoomable"><img src="image/花籃G款.JPG" alt="花籃G"><p>G款 NT$6,000 / 對</p></div>
+  <div class="zoomable"><img src="image/花籃H款.JPG" alt="花籃H"><p>H款 NT$6,500 / 對</p></div>
 </div>
 
-<!-- 放大圖層 -->
-<div id="image-overlay">
-  <img id="overlay-img" src="" alt="">
+<!-- 放大預覽 -->
+<div id="image-overlay"><img id="overlay-img" src="" alt=""></div>
+
+<!-- 固定聯絡 -->
+<div id="fixed-links">
+  <a href="tel:0938-179-858">
+    <img src="image/24小時專線.png" alt="24小時服務電話">
+  </a>
+  <a href="https://line.me/ti/p/nZJmE8-b6X" target="_blank">
+    <img src="image/聯繫line.PNG" alt="LINE 聯絡我們">
+  </a>
 </div>
 
-<!-- JavaScript 控制 -->
+<!-- 🌿 JS 控制 -->
 <script>
-  // 顯示/隱藏花籃畫廊
-  document.getElementById('show-flower-baskets').addEventListener('click', function () {
-    var gallery = document.getElementById('flower-basket-gallery');
-    if (gallery.style.display === 'none' || gallery.style.display === '') {
-      gallery.style.display = 'grid';
-      this.innerHTML = '<strong>隱藏花籃樣式 🌹</strong>';
-    } else {
-      gallery.style.display = 'none';
-      this.innerHTML = '<strong>顯示花籃樣式 🌹</strong>';
-    }
+document.addEventListener("DOMContentLoaded", () => {
+  const btnToggle = document.getElementById("show-flower-baskets");
+  const gallery = document.getElementById("flower-basket-gallery");
+  const overlay = document.getElementById("image-overlay");
+  const overlayImg = document.getElementById("overlay-img");
+
+  // 顯示/隱藏花籃樣式
+  btnToggle.addEventListener("click", () => {
+    gallery.classList.toggle("hidden");
+    btnToggle.textContent = gallery.classList.contains("hidden")
+      ? "🌹 顯示花籃樣式"
+      : "🌹 隱藏花籃樣式";
   });
 
   // 點圖片放大
-  document.querySelectorAll('.zoomable img').forEach(function (img) {
-    img.addEventListener('click', function () {
-      const overlay = document.getElementById('image-overlay');
-      const overlayImg = document.getElementById('overlay-img');
-      overlayImg.src = this.src;
-      overlay.style.display = 'flex';
+  document.querySelectorAll(".zoomable img").forEach(img => {
+    img.addEventListener("click", () => {
+      overlayImg.src = img.src;
+      overlay.classList.add("show");
     });
   });
 
-  // 點背景關閉放大圖
-  document.getElementById('image-overlay').addEventListener('click', function () {
-    this.style.display = 'none';
-  });
+  // 點背景關閉
+  overlay.addEventListener("click", () => overlay.classList.remove("show"));
+});
 </script>
 
-<!-- CSS 樣式 -->
+<!-- 🌿 樣式 -->
 <style>
-/* 致贈花籃區塊 */
 #donate-flower {
   text-align: center;
-  margin: 20px auto;
-  max-width: 500px;
-  padding: 20px;
-  border: 3px solid #005bb5;
+  background: #eef6ff;
+  border: 2px solid #8ab6f9;
   border-radius: 12px;
-  background-color: #e6f2ff;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  padding: 25px;
+  margin: 25px auto;
+  max-width: 600px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  animation: fadeIn 1s ease;
 }
-
 #donate-flower h3 {
-  font-size: 30px;
-  color: #00274d;
+  font-size: 1.8rem;
+  color: #003366;
   margin-bottom: 10px;
 }
-
 #donate-flower p {
-    
-  font-size: 22px;
+  font-size: 1.1rem;
   color: #333;
   margin-bottom: 15px;
 }
-
 .btn, .btn-order {
   font-family: 'Iansui', 'Noto Serif TC', serif;
   display: inline-block;
   padding: 10px 25px;
-  font-size: 18px;
+  font-size: 1rem;
   color: #fff;
-  background-color: #0077e6;
-  border: none;
-  border-radius: 6px;
+  background: linear-gradient(135deg, #4a90e2, #005bb5);
+  border-radius: 8px;
   text-decoration: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  margin-top: 10px;
+  margin: 8px;
 }
-
 .btn:hover, .btn-order:hover {
-  background-color: #005bb5;
   transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
 }
 
-/* 花籃畫廊排版 */
+/* 花籃樣式區 */
 #flower-basket-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 15px;
-  justify-content: center;
-  margin-top: 20px;
+  margin: 20px auto;
+  padding: 0 15px;
+  max-width: 900px;
+  animation: fadeIn 0.6s ease;
 }
+#flower-basket-gallery.hidden { display: none; }
 
-/* 單一花籃樣式 */
 .zoomable {
   text-align: center;
 }
-
 .zoomable img {
   width: 100%;
-  border: 2px solid #ccc;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: zoom-in;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.25s ease;
 }
-
 .zoomable img:hover {
-  border-color: #0077e6;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+.zoomable p {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #333;
 }
 
-.price {
-    font-family: 'Iansui', 'Noto Serif TC', serif; /* 先套用芫荽體，備援 Noto Serif TC */
-  margin-top: 10px;
-  font-size: 16px;
-  color: #444;
-}
-
-/* 放大圖層 */
+/* 放大預覽層 */
 #image-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   background: rgba(0,0,0,0.85);
   display: none;
   justify-content: center;
   align-items: center;
   z-index: 9999;
 }
-
+#image-overlay.show {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
 #image-overlay img {
   max-width: 90%;
   max-height: 90%;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.3);
-  transition: transform 0.3s;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.25);
+}
+
+/* 固定聯絡區 */
+#fixed-links {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+  z-index: 1000;
+}
+#fixed-links img {
+  width: 65px;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+#fixed-links img:hover {
+  transform: scale(1.1);
+}
+
+/* 動畫 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 響應式 */
+@media (max-width: 480px) {
+  #donate-flower h3 { font-size: 1.4rem; }
+  .btn, .btn-order { font-size: 0.95rem; }
+  #fixed-links { right: 8px; bottom: 8px; }
 }
 </style>
         
