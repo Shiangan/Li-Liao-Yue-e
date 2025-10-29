@@ -8,8 +8,8 @@
     <meta name="author" content="祥安生命">
     <link rel="icon" href="image/logo.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="李張月娥夫人雲端訃告-祥安">
-    <meta property="og:description" content="追思李張月娥夫人雲端訃告,衷心感謝親友的慰問與陪伴,治喪期間,因時間有限,以電子追思訊息,邀請您一同參與李廖月娥夫人人生畢業典禮">
+    <meta property="og:title" content="李廖月娥夫人雲端訃告-祥安">
+    <meta property="og:description" content="追思李廖月娥夫人雲端訃告,衷心感謝親友的慰問與陪伴,治喪期間,因時間有限,以電子追思訊息,邀請您一同參與李廖月娥夫人人生畢業典禮">
     <meta property="og:image" content="https://24hour.xn--kpry57d/Li-Liao-Yue-e/image/Write.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -1267,7 +1267,7 @@ document.querySelectorAll(".gallery-img").forEach(img => {
     </div>
   </div>
 
-<!-- 🔹 參加喪禮注意事項（最完善質感版） -->
+<!-- 🔹 參加喪禮注意事項（符號對齊版） -->
 <section id="funeral-notice">
   <!-- 標題分兩行置中 -->
   <h4 class="notice-title">
@@ -1277,12 +1277,11 @@ document.querySelectorAll(".gallery-img").forEach(img => {
 
   <!-- 注意事項列表 -->
   <ul class="notice-list">
-    <li>🔹 當日正沖：民國86年次（屬牛）。</li>
-    <li>🔹 請來賓著整齊、樸素深色服裝，以示尊重。</li>
-    <li>🔹 建議提前抵達會場，並配合會場秩序與指示人員安排。</li>
-    <li>🔹 入場前請將手機調為靜音或關機，避免影響儀式進行。</li>
-    <li>🔹 儀式中請依工作人員指引，依序行禮或致意。</li>
-    <li>🔹 若欲致贈花籃或奠儀，請先聯繫陳先生：
+    <li><span class="bullet">🔹</span> 請來賓著整齊、樸素深色服裝，以示尊重。</li>
+    <li><span class="bullet">🔹</span> 建議提前抵達會場，並配合會場秩序與指示人員安排。</li>
+    <li><span class="bullet">🔹</span> 入場前請將手機調為靜音或關機，避免影響儀式進行。</li>
+    <li><span class="bullet">🔹</span> 儀式中請依工作人員指引，依序行禮或致意。</li>
+    <li><span class="bullet">🔹</span> 統一製作，致贈花籃，請先聯繫禮儀師-陳柏元先生：
       <div class="contact-line">
         <a href="tel:0938179858">📞 0938-179-858</a>
         <a href="https://line.me/ti/p/TuM5y_Of6I" target="_blank">💬 LINE 聯繫</a>
@@ -1291,7 +1290,6 @@ document.querySelectorAll(".gallery-img").forEach(img => {
   </ul>
 </section>
 
-<!-- 🔹 樣式設計 -->
 <style>
 #funeral-notice {
   background: #ffffff;
@@ -1322,20 +1320,25 @@ document.querySelectorAll(".gallery-img").forEach(img => {
   margin: 0;
 }
 
-/* 列表每項目 */
+/* 列表每項目，符號對齊 */
 #funeral-notice .notice-list li {
   font-size: clamp(1rem, 2vw, 1.1rem);
   color: #444444;
   line-height: 1.8;
   margin-bottom: 12px;
 
-  display: inline-block;
-  width: 100%;
-  white-space: normal;
-  overflow-wrap: break-word; /* 確保長句不消失 */
+  display: flex;
+  align-items: flex-start;
 }
 
-/* LINE 與電話按鈕置中 */
+/* 符號固定寬度對齊 */
+#funeral-notice .notice-list li .bullet {
+  flex: 0 0 28px; /* 固定符號寬度 */
+  text-align: center;
+  margin-right: 8px;
+}
+
+/* 聯絡方式置中綠底 */
 .contact-line {
   text-align: center;
   margin-top: 6px;
@@ -1393,7 +1396,6 @@ document.querySelectorAll(".gallery-img").forEach(img => {
   }
 }
 </style>
-
 <!-- 页脚 -->
 <footer style="background-color: #f3f3f3; padding: 20px 0; text-align: center; font-family: Arial, sans-serif;">
     <!-- 名片內容 -->
