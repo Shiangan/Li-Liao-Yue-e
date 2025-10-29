@@ -1272,12 +1272,12 @@ document.querySelectorAll(".gallery-img").forEach(img => {
     🕯️ 參加喪禮<br>國曆 2024.11.10（一）
   </h4>
   <ul class="notice-list">
-    <li>🔹 請來賓著整齊、樸素深色服裝，以示尊重。</li>
-    <li>🔹 建議提前抵達會場，並配合會場秩序與指示人員安排。</li>
-    <li>🔹 入場前請將手機調為靜音或關機，避免影響儀式進行。</li>
-    <li>🔹 儀式中請依工作人員指引，依序行禮或致意。</li>
+    <li><span class="bullet">🔹</span> 請來賓著整齊、樸素深色服裝，以示尊重。</li>
+    <li><span class="bullet">🔹</span> 建議提前抵達會場，並配合會場秩序與指示人員安排。</li>
+    <li><span class="bullet">🔹</span> 入場前請將手機調為靜音或關機，避免影響儀式進行。</li>
+    <li><span class="bullet">🔹</span> 儀式中請依工作人員指引，依序行禮或致意。</li>
     <li>
-      🔹 統一佈置，致贈花籃，請聯繫陳先生：
+      <span class="bullet">🔹</span> 若欲致贈花籃或奠儀，請先聯繫陳先生：
       <span class="contact-buttons">
         <a href="tel:0938179858" class="contact-btn phone">📞 0938-179-858</a>
         <a href="https://line.me/ti/p/TuM5y_Of6I" class="contact-btn line">💬 LINE 聯繫</a>
@@ -1297,45 +1297,34 @@ document.querySelectorAll(".gallery-img").forEach(img => {
   font-family: "Iansui", "Noto Sans TC", "微軟正黑體", sans-serif;
 }
 
-/* 標題 */
-#funeral-notice .notice-title {
+.notice-title {
   font-size: clamp(1.5rem, 2.2vw, 1.9rem);
   color: #2a2a2a;
-  text-align: center; /* 標題居中 */
+  text-align: center;
   margin-bottom: 20px;
   border-bottom: 2px solid #c49b57;
   padding-bottom: 6px;
   letter-spacing: 0.5px;
 }
 
-/* 列表 */
-#funeral-notice .notice-list {
+.notice-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* 列表每項目 */
-#funeral-notice .notice-list li {
+.notice-list li {
   font-size: clamp(1rem, 2vw, 1.1rem);
   color: #444444;
   line-height: 1.8;
   margin-bottom: 12px;
-
   display: flex;
   align-items: flex-start;
 }
 
-/* 保證符號對齊 */
-#funeral-notice .notice-list li::before {
-  content: "🔹";
-  margin-right: 8px;
-  flex-shrink: 0;
-}
-
-/* 去掉原本列表符號 */
-#funeral-notice .notice-list li {
-  list-style: none;
+.notice-list .bullet {
+  flex: 0 0 25px; /* 固定符號寬度保持對齊 */
+  display: inline-block;
 }
 
 /* 聯絡方式按鈕 */
@@ -1343,7 +1332,7 @@ document.querySelectorAll(".gallery-img").forEach(img => {
   display: inline-flex;
   gap: 10px;
   margin-left: 5px;
-  flex-wrap: wrap; /* LINE 可換行 */
+  flex-wrap: wrap; 
 }
 
 .contact-btn {
@@ -1359,7 +1348,6 @@ document.querySelectorAll(".gallery-img").forEach(img => {
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
-/* 藍色電話按鈕，不換行 */
 .contact-btn.phone {
   background: linear-gradient(135deg, #6a9cfb, #3571d3);
   white-space: nowrap;
@@ -1369,7 +1357,6 @@ document.querySelectorAll(".gallery-img").forEach(img => {
   transform: translateY(-1px);
 }
 
-/* LINE 綠色按鈕 */
 .contact-btn.line {
   background: linear-gradient(135deg, #00c300, #008f00);
 }
@@ -1378,19 +1365,19 @@ document.querySelectorAll(".gallery-img").forEach(img => {
   transform: translateY(-1px);
 }
 
-/* 響應式設定 */
+/* 響應式 */
 @media (max-width: 768px) {
   #funeral-notice {
     padding: 22px 18px;
   }
-  #funeral-notice .notice-title {
+  .notice-title {
     font-size: clamp(1.3rem, 4vw, 1.6rem);
   }
-  #funeral-notice .notice-list li {
+  .notice-list li {
     font-size: clamp(0.95rem, 3.5vw, 1rem);
   }
   .contact-buttons {
-    flex-direction: column; /* LINE 按鈕窄屏換行 */
+    flex-direction: column;
     gap: 6px;
   }
   .contact-btn {
