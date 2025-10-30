@@ -553,223 +553,196 @@ document.addEventListener("DOMContentLoaded", () => {
 });
         </script>
 
-<!-- 🌸 致贈花籃區 -->
+<!-- 致贈花籃部分 -->
 <section id="donate-flower">
   <h3><strong>統一致贈花籃，送上祝福</strong></h3>
-  <p>請選擇花籃樣式，點擊下方按鈕透過 LINE 聯繫我們。</p>
+  <p><strong>選擇花籃樣式，點選以下LINE與我們聯繫。</strong></p>
 
-  <a href="https://line.me/ti/p/nZJmE8-b6X" target="_blank" class="btn-order">
-    💬 加入 LINE 訂購
-  </a>
-  <button id="show-flower-baskets" class="btn">
-    🌹 顯示花籃樣式
-  </button>
+  <a href="https://line.me/ti/p/nZJmE8-b6X" target="_blank" class="btn-order"><strong>加入 LINE 訂購</strong></a><br>
+  <a href="javascript:void(0);" id="show-flower-baskets" class="btn"><strong>顯示花籃樣式 🌹</strong></a>
 </section>
 
-<!-- 🌸 花籃畫廊 -->
-<div id="flower-basket-gallery" class="hidden">
-  <div class="zoomable"><img src="image/花籃A款.JPG" alt="花籃A"><p class="price">A款 NT$2,500 / 對</p></div>
-  <div class="zoomable"><img src="image/花籃B款.JPG" alt="花籃B"><p class="price">B款 NT$3,000 / 對</p></div>
-  <div class="zoomable"><img src="image/花籃C款.JPG" alt="花籃C"><p class="price">C款 NT$3,500 / 對</p></div>
-  <div class="zoomable"><img src="image/花籃D款.JPG" alt="花籃D"><p class="price">D款 NT$4,500 / 對</p></div>
-  <div class="zoomable"><img src="image/花籃E款.JPG" alt="花籃E"><p class="price">E款 NT$5,000 / 對</p></div>
-  <div class="zoomable"><img src="image/花籃F款.JPG" alt="花籃F"><p class="price">F款 NT$5,500 / 對</p></div>
-  <div class="zoomable"><img src="image/花籃G款.JPG" alt="花籃G"><p class="price">G款 NT$6,000 / 對</p></div>
-  <div class="zoomable"><img src="image/花籃H款.JPG" alt="花籃H"><p class="price">H款 NT$6,500 / 對</p></div>
+<!-- 花籃畫廊 -->
+<div id="flower-basket-gallery" style="display: none;">
+  <div class="zoomable">
+    <img src="image/花籃A款.JPG" alt="花籃A" loading="lazy">
+    <p class="price"><strong>A款NT$2,500/對</strong></p>
+  </div>
+  <div class="zoomable">
+    <img src="image/花籃B款.JPG" alt="花籃B" loading="lazy">
+    <p class="price"><strong>B款NT$3,000/對</strong></p>
+  </div>
+  <div class="zoomable">
+    <img src="image/花籃C款.JPG" alt="花籃C" loading="lazy">
+    <p class="price"><strong>C款NT$3,500/對</strong></p>
+  </div>
+  <div class="zoomable">
+    <img src="image/花籃D款.JPG" alt="花籃D" loading="lazy">
+    <p class="price"><strong>D款NT$4,500/對</strong></p>
+  </div>
+  <div class="zoomable">
+    <img src="image/花籃E款.JPG" alt="花籃E" loading="lazy">
+    <p class="price"><strong>E款NT$5,000/對</strong></p>
+  </div>
+  <div class="zoomable">
+    <img src="image/花籃F款.JPG" alt="花籃F" loading="lazy">
+    <p class="price"><strong>F款NT$5,500/對</strong></p>
+  </div>
+  <div class="zoomable">
+    <img src="image/花籃G款.JPG" alt="花籃G" loading="lazy">
+    <p class="price"><strong>G款NT$6,000/對</strong></p>
+  </div>
+  <div class="zoomable">
+    <img src="image/花籃H款.JPG" alt="花籃H" loading="lazy">
+    <p class="price"><strong>H款NT$6,500/對</strong></p>
+  </div>
 </div>
 
-<!-- 放大預覽 -->
-<div id="image-overlay"><img id="overlay-img" src="" alt=""></div>
+<!-- 放大圖層 -->
+<div id="image-overlay">
+  <img id="overlay-img" src="" alt="">
+</div>
 
-<!-- 🌿 JS 控制 -->
+<!-- JavaScript 控制 -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const btnToggle = document.getElementById("show-flower-baskets");
-  const gallery = document.getElementById("flower-basket-gallery");
-  const overlay = document.getElementById("image-overlay");
-  const overlayImg = document.getElementById("overlay-img");
-
   // 顯示/隱藏花籃畫廊
-  btnToggle.addEventListener("click", () => {
-    gallery.classList.toggle("hidden");
-    btnToggle.textContent = gallery.classList.contains("hidden")
-      ? "🌹 顯示花籃樣式"
-      : "🌹 隱藏花籃樣式";
+  document.getElementById('show-flower-baskets').addEventListener('click', function () {
+    var gallery = document.getElementById('flower-basket-gallery');
+    if (gallery.style.display === 'none' || gallery.style.display === '') {
+      gallery.style.display = 'grid';
+      this.innerHTML = '<strong>隱藏花籃樣式 🌹</strong>';
+    } else {
+      gallery.style.display = 'none';
+      this.innerHTML = '<strong>顯示花籃樣式 🌹</strong>';
+    }
   });
 
   // 點圖片放大
-  document.querySelectorAll(".zoomable img").forEach(img => {
-    img.addEventListener("click", () => {
-      overlayImg.src = img.src;
-      overlay.classList.add("show");
+  document.querySelectorAll('.zoomable img').forEach(function (img) {
+    img.addEventListener('click', function () {
+      const overlay = document.getElementById('image-overlay');
+      const overlayImg = document.getElementById('overlay-img');
+      overlayImg.src = this.src;
+      overlay.style.display = 'flex';
     });
   });
 
-  // 點背景關閉
-  overlay.addEventListener("click", () => overlay.classList.remove("show"));
-});
+  // 點背景關閉放大圖
+  document.getElementById('image-overlay').addEventListener('click', function () {
+    this.style.display = 'none';
+  });
 </script>
 
-<!-- 🌿 樣式 -->
+<!-- CSS 樣式 -->
 <style>
-/* 字體設定 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap');
-@font-face {
-  font-family: 'Iansui';
-  src: url('Iansui-Regular.ttf') format('truetype');
-}
-
-/* 花籃區塊 */
+/* 致贈花籃區塊 */
 #donate-flower {
   text-align: center;
-  background: #eef6ff;
-  border: 2px solid #8ab6f9;
+  margin: 20px auto;
+  max-width: 500px;
+  padding: 20px;
+  border: 3px solid #005bb5;
   border-radius: 12px;
-  padding: 25px;
-  margin: 25px auto;
-  max-width: 600px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
-  animation: fadeIn 1s ease;
+  background-color: #e6f2ff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
+
 #donate-flower h3 {
-  font-size: 1.8rem;
-  color: #003366;
+  font-size: 28px;
+  color: #00274d;
   margin-bottom: 10px;
 }
+
 #donate-flower p {
-  font-size: 1.1rem;
+  font-size: 19px;
   color: #333;
   margin-bottom: 15px;
 }
 
-/* 按鈕 */
 .btn, .btn-order {
-  font-family: 'Iansui', 'Noto Serif TC', serif;
   display: inline-block;
-  padding: 12px 28px;
-  font-size: 1rem;
+  padding: 10px 25px;
+  font-size: 18px;
   color: #fff;
-  background: linear-gradient(135deg, #4a90e2, #005bb5);
-  border-radius: 8px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  margin: 8px;
+  background-color: #0077e6;
   border: none;
-}
-.btn:hover, .btn-order:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-top: 10px;
 }
 
-/* 花籃畫廊 */
+.btn:hover, .btn-order:hover {
+  background-color: #005bb5;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 花籃畫廊排版 */
 #flower-basket-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 18px;
-  margin: 25px auto;
-  padding: 0 15px;
-  max-width: 900px;
-  animation: fadeIn 0.6s ease;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
 }
-#flower-basket-gallery.hidden { display: none; }
 
-/* 單一花籃卡片 */
+/* 單一花籃樣式 */
 .zoomable {
   text-align: center;
-  background: #fff;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  white-space: nowrap; /* 價格一行顯示 */
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
-.zoomable:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
-}
+
 .zoomable img {
   width: 100%;
+  border: 2px solid #ccc;
   border-radius: 8px;
   cursor: zoom-in;
-  transition: transform 0.25s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
+
 .zoomable img:hover {
-  transform: scale(1.04);
+  border-color: #0077e6;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* 價格文字 */
-.zoomable .price {
+.price {
   margin-top: 10px;
-  font-family: 'Iansui', 'Noto Serif TC', serif;
-  font-size: 1.05rem;
-  color: #4a4a4a;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  white-space: nowrap; /* 保持在一行 */
+  font-size: 16px;
+  color: #444;
 }
 
-/* 放大燈箱 */
+/* 放大圖層 */
 #image-overlay {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0,0,0,0.85);
   display: none;
   justify-content: center;
   align-items: center;
   z-index: 9999;
 }
-#image-overlay.show {
-  display: flex;
-  animation: fadeIn 0.3s ease;
-}
+
 #image-overlay img {
   max-width: 90%;
   max-height: 90%;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.25);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+  transition: transform 0.3s;
 }
-
-/* 動畫 */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* 響應式 */
-@media (max-width: 600px) {
-  #donate-flower h3 { font-size: 1.5rem; }
-  #donate-flower p { font-size: 1rem; }
-  .btn, .btn-order { padding: 10px 20px; font-size: 0.95rem; }
-  .zoomable .price { font-size: 1rem; }
-      #fixed-links { right: 8px; bottom: 8px; }
-}
-
-
-
-/* 固定聯絡區 */
-#fixed-links {
-  position: fixed;
-  bottom: 12px;
-  right: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: flex-end;
-  z-index: 1000;
-}
-
-
 </style>
         
 <!-- 固定聯絡方式 -->
         <div id="fixed-links">
-            <a href="https://line.me/ti/p/nZJmE8-b6X" target="_blank" class="bold">
-                <img src="image/聯繫line.PNG" alt="LINE 聯絡我們" style="width: 50px; height: 50px;" loading="lazy">
-            </a>
             <a href="tel:0938-179-858" class="bold">
                 <img src="image/24小時專線.png" alt="24小時服務電話" style="width: 70px; height: 30px;" loading="lazy">
+            </a>
+            <a href="https://line.me/ti/p/nZJmE8-b6X" target="_blank" class="bold">
+                <img src="image/聯繫line.PNG" alt="LINE 聯絡我們" style="width: 50px; height: 50px;" loading="lazy">
             </a>
         </div>
 
@@ -800,71 +773,6 @@ document.addEventListener("DOMContentLoaded", () => {
             </style>
         
          
-<section id="business-card">
-  <img src="image/未命名設計.png" alt="名片" class="business-card-img" loading="lazy">
-</section>
-
-<style>
-.business-card-img {
-  display: block;
-  max-width: 90%;
-  height: auto;
-  margin: 20px auto;
-  border-radius: 10px;
-  cursor: zoom-in;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-@media (max-width: 600px) {
-  #share-buttons h2 {
-    font-size: 1.2rem;
-  }
-  .share-btn img {
-    width: 45px;
-    height: 45px;
-  }
-}
-</style>
-
-<script>
-const cardImg = document.querySelector(".business-card-img");
-if (cardImg) {
-  cardImg.addEventListener("click", function () {
-    const modal = document.createElement("div");
-    Object.assign(modal.style, {
-      position: "fixed",
-      top: "0",
-      left: "0",
-      width: "100vw",
-      height: "100vh",
-      backgroundColor: "rgba(0,0,0,0.8)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      zIndex: "1000"
-    });
-
-    const img = document.createElement("img");
-    img.src = cardImg.src;
-    img.alt = cardImg.alt;
-    Object.assign(img.style, {
-      maxWidth: "90%",
-      maxHeight: "90%",
-      borderRadius: "10px",
-      boxShadow: "0 4px 8px rgba(0,0,0,0.5)",
-      cursor: "pointer"
-    });
-
-    modal.appendChild(img);
-    document.body.appendChild(modal);
-
-    modal.addEventListener("click", () => document.body.removeChild(modal));
-  });
-}
-</script>
 
 <!-- 分享按鈕區 -->
 <section id="share-buttons">
@@ -886,46 +794,6 @@ if (cardImg) {
     </a>
   </div>
 </section>
-
-
-
-<style>
-/* 分享區塊響應式設計 */
-#share-buttons {
-  text-align: center;
-  margin: 30px 0;
-}
-#share-buttons h2 {
-  font-size: 1.4rem;
-  margin-bottom: 17px;
-}
-.share-btns {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.share-btn img {
-  width: 50px;
-  height: 50px;
-  transition: transform 0.2s ease;
-}
-.share-btn img:hover {
-  transform: scale(1.1);
-}
-
-
-/* 小螢幕調整 */
-@media (max-width: 600px) {
-  #share-buttons h2 {
-    font-size: 1.2rem;
-  }
-  .share-btn img {
-    width: 45px;
-    height: 45px;
-  }
-}
-</style>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -958,7 +826,7 @@ document.addEventListener("DOMContentLoaded", function () {
     lineShareLink.href = "https://line.me/R/msg/text/?" + encodedUrl;
   }
 
-  // 🔍 名片點擊放大功能
+  // 點擊名片圖片放大功能
   const cardImg = document.querySelector(".business-card-img");
   if (cardImg) {
     cardImg.addEventListener("click", function () {
@@ -991,8 +859,150 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.removeChild(modal);
       });
     });
-      ｝
+  }
+});
 </script>
+
+<style>
+
+
+.business-card-img {
+    max-width: 500px; /* 限制名片圖片最大寬度 */
+    width: 100%; /* 確保圖片響應式縮放 */
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 10px; /* 圓角效果 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 陰影效果 */
+    cursor: pointer; /* 鼠標變為可點擊狀態 */
+    transition: transform 0.3s ease; /* 點擊縮放效果 */
+}
+
+.business-card-img:active {
+    transform: scale(1.05); /* 點擊時放大 */
+}
+
+/* 分享按鈕樣式 */
+#share-buttons {
+    text-align: center;
+    margin: 10px auto;
+}
+
+.share-btns {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.share-btn {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.share-btn img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%; /* 圓形圖標 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 圖標陰影 */
+}
+
+.share-btn:hover {
+    transform: scale(1.1); /* 懸停時放大 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 增強陰影 */
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .business-card-img {
+        max-width: 450px; /* 小螢幕上稍微縮小名片 */
+    }
+
+    .share-btn {
+        width: 40px; /* 小螢幕縮小按鈕尺寸 */
+        height: 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    .share-btns {
+        flex-wrap: wrap; /* 小螢幕按鈕換行 */
+    }
+
+    .business-card-img {
+        max-width: 380px; /* 手機螢幕上進一步縮小名片 */
+    }
+}
+
+</style>
+    
+    <style>
+:root {
+    --primary-bg-color: #f9f9f9;
+    --title-color: #333;
+    --subtitle-color: #666;
+    --image-border-radius: 10px;
+    --hover-scale: 1.05;
+    --transition-duration: 0.3s;
+    --box-shadow: rgba(0, 0, 0, 0.1) 0 6px 12px;
+}
+
+/* 整體容器 */
+.transport-info {
+    padding: 20px;
+    background-color: var(--primary-bg-color);
+    border-radius: var(--image-border-radius);
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+}
+
+/* 標題樣式 */
+.title {
+    font-family: '辰魚落雁體', sans-serif;
+    color: var(--title-color);
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+/* 副標題樣式 */
+.subtitle {
+    font-family: 'Arial', sans-serif;
+    color: var(--subtitle-color);
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* 圖片畫廊 */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+/* 圖片樣式 */
+.gallery-img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--image-border-radius);
+    transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+}
+
+/* 懸停效果 */
+.gallery-img:hover {
+    transform: scale(var(--hover-scale));
+    box-shadow: var(--box-shadow);
+}
+
+/* 響應式設計：圖片調整 */
+@media (max-width: 600px) {
+    .gallery-img {
+        width: 90%;
+    }
+}
+</style>
+       
        
 
         
