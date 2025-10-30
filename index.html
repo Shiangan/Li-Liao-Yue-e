@@ -619,7 +619,7 @@ document.addEventListener("DOMContentLoaded", () => {
   src: url('Iansui-Regular.ttf') format('truetype');
 }
 
-/* 整個花籃區 */
+/* 花籃區塊 */
 #donate-flower {
   text-align: center;
   background: #eef6ff;
@@ -673,7 +673,7 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 #flower-basket-gallery.hidden { display: none; }
 
-/* 單一花籃樣式 */
+/* 單一花籃卡片 */
 .zoomable {
   text-align: center;
   background: #fff;
@@ -681,6 +681,9 @@ document.addEventListener("DOMContentLoaded", () => {
   padding: 10px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.08);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  white-space: nowrap; /* 價格一行顯示 */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .zoomable:hover {
   transform: translateY(-4px);
@@ -704,9 +707,10 @@ document.addEventListener("DOMContentLoaded", () => {
   color: #4a4a4a;
   font-weight: 600;
   letter-spacing: 0.5px;
+  white-space: nowrap; /* 保持在一行 */
 }
 
-/* 放大預覽層 */
+/* 放大燈箱 */
 #image-overlay {
   position: fixed;
   inset: 0;
@@ -727,6 +731,22 @@ document.addEventListener("DOMContentLoaded", () => {
   box-shadow: 0 0 20px rgba(255,255,255,0.25);
 }
 
+/* 動畫 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 響應式 */
+@media (max-width: 600px) {
+  #donate-flower h3 { font-size: 1.5rem; }
+  #donate-flower p { font-size: 1rem; }
+  .btn, .btn-order { padding: 10px 20px; font-size: 0.95rem; }
+  .zoomable .price { font-size: 1rem; }
+      #fixed-links { right: 8px; bottom: 8px; }
+}
+
+
 
 /* 固定聯絡區 */
 #fixed-links {
@@ -741,18 +761,6 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 
 
-/* 動畫 */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* 響應式 */
-@media (max-width: 480px) {
-  #donate-flower h3 { font-size: 1.4rem; }
-  .btn, .btn-order { font-size: 0.95rem; }
-  #fixed-links { right: 8px; bottom: 8px; }
-}
 </style>
         
 <!-- 固定聯絡方式 -->
