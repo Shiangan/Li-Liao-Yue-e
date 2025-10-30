@@ -553,15 +553,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
         </script>
 
-<!-- 致贈花籃部分 -->
 <!-- 🌸 致贈花籃區 -->
 <section id="donate-flower">
   <h3><strong>統一致贈花籃，送上祝福</strong></h3>
-  <p><strong>選擇花籃樣式，點擊下方按鈕透過 LINE 聯繫。</strong></p>
+  <p>請選擇花籃樣式，點擊下方按鈕透過 LINE 聯繫我們。</p>
 
   <a href="https://line.me/ti/p/nZJmE8-b6X" target="_blank" class="btn-order">
     💬 加入 LINE 訂購
-  </a><br>
+  </a>
   <button id="show-flower-baskets" class="btn">
     🌹 顯示花籃樣式
   </button>
@@ -569,20 +568,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <!-- 🌸 花籃畫廊 -->
 <div id="flower-basket-gallery" class="hidden">
-  <div class="zoomable"><img src="image/花籃A款.JPG" alt="花籃A"><p>A款 NT$2,500 / 對</p></div>
-  <div class="zoomable"><img src="image/花籃B款.JPG" alt="花籃B"><p>B款 NT$3,000 / 對</p></div>
-  <div class="zoomable"><img src="image/花籃C款.JPG" alt="花籃C"><p>C款 NT$3,500 / 對</p></div>
-  <div class="zoomable"><img src="image/花籃D款.JPG" alt="花籃D"><p>D款 NT$4,500 / 對</p></div>
-  <div class="zoomable"><img src="image/花籃E款.JPG" alt="花籃E"><p>E款 NT$5,000 / 對</p></div>
-  <div class="zoomable"><img src="image/花籃F款.JPG" alt="花籃F"><p>F款 NT$5,500 / 對</p></div>
-  <div class="zoomable"><img src="image/花籃G款.JPG" alt="花籃G"><p>G款 NT$6,000 / 對</p></div>
-  <div class="zoomable"><img src="image/花籃H款.JPG" alt="花籃H"><p>H款 NT$6,500 / 對</p></div>
+  <div class="zoomable"><img src="image/花籃A款.JPG" alt="花籃A"><p class="price">A款 NT$2,500 / 對</p></div>
+  <div class="zoomable"><img src="image/花籃B款.JPG" alt="花籃B"><p class="price">B款 NT$3,000 / 對</p></div>
+  <div class="zoomable"><img src="image/花籃C款.JPG" alt="花籃C"><p class="price">C款 NT$3,500 / 對</p></div>
+  <div class="zoomable"><img src="image/花籃D款.JPG" alt="花籃D"><p class="price">D款 NT$4,500 / 對</p></div>
+  <div class="zoomable"><img src="image/花籃E款.JPG" alt="花籃E"><p class="price">E款 NT$5,000 / 對</p></div>
+  <div class="zoomable"><img src="image/花籃F款.JPG" alt="花籃F"><p class="price">F款 NT$5,500 / 對</p></div>
+  <div class="zoomable"><img src="image/花籃G款.JPG" alt="花籃G"><p class="price">G款 NT$6,000 / 對</p></div>
+  <div class="zoomable"><img src="image/花籃H款.JPG" alt="花籃H"><p class="price">H款 NT$6,500 / 對</p></div>
 </div>
 
 <!-- 放大預覽 -->
 <div id="image-overlay"><img id="overlay-img" src="" alt=""></div>
-
-
 
 <!-- 🌿 JS 控制 -->
 <script>
@@ -592,7 +589,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById("image-overlay");
   const overlayImg = document.getElementById("overlay-img");
 
-  // 顯示/隱藏花籃樣式
+  // 顯示/隱藏花籃畫廊
   btnToggle.addEventListener("click", () => {
     gallery.classList.toggle("hidden");
     btnToggle.textContent = gallery.classList.contains("hidden")
@@ -615,6 +612,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <!-- 🌿 樣式 -->
 <style>
+/* 字體設定 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap');
+@font-face {
+  font-family: 'Iansui';
+  src: url('Iansui-Regular.ttf') format('truetype');
+}
+
+/* 整個花籃區 */
 #donate-flower {
   text-align: center;
   background: #eef6ff;
@@ -636,10 +641,12 @@ document.addEventListener("DOMContentLoaded", () => {
   color: #333;
   margin-bottom: 15px;
 }
+
+/* 按鈕 */
 .btn, .btn-order {
   font-family: 'Iansui', 'Noto Serif TC', serif;
   display: inline-block;
-  padding: 10px 25px;
+  padding: 12px 28px;
   font-size: 1rem;
   color: #fff;
   background: linear-gradient(135deg, #4a90e2, #005bb5);
@@ -647,41 +654,56 @@ document.addEventListener("DOMContentLoaded", () => {
   text-decoration: none;
   transition: all 0.3s ease;
   margin: 8px;
+  border: none;
 }
 .btn:hover, .btn-order:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.25);
 }
 
-/* 花籃樣式區 */
+/* 花籃畫廊 */
 #flower-basket-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 15px;
-  margin: 20px auto;
+  gap: 18px;
+  margin: 25px auto;
   padding: 0 15px;
   max-width: 900px;
   animation: fadeIn 0.6s ease;
 }
 #flower-basket-gallery.hidden { display: none; }
 
+/* 單一花籃樣式 */
 .zoomable {
   text-align: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.zoomable:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
 }
 .zoomable img {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: zoom-in;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: transform 0.25s ease;
 }
 .zoomable img:hover {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
-.zoomable p {
-  margin-top: 8px;
-  font-size: 0.95rem;
-  color: #333;
+
+/* 價格文字 */
+.zoomable .price {
+  margin-top: 10px;
+  font-family: 'Iansui', 'Noto Serif TC', serif;
+  font-size: 1.05rem;
+  color: #4a4a4a;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 /* 放大預覽層 */
@@ -704,6 +726,7 @@ document.addEventListener("DOMContentLoaded", () => {
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(255,255,255,0.25);
 }
+
 
 /* 固定聯絡區 */
 #fixed-links {
