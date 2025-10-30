@@ -769,10 +769,71 @@ document.addEventListener("DOMContentLoaded", () => {
             </style>
         
          
-<!-- 名片區 -->
 <section id="business-card">
   <img src="image/未命名設計.png" alt="名片" class="business-card-img" loading="lazy">
 </section>
+
+<style>
+.business-card-img {
+  display: block;
+  max-width: 90%;
+  height: auto;
+  margin: 20px auto;
+  border-radius: 10px;
+  cursor: zoom-in;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@media (max-width: 600px) {
+  #share-buttons h2 {
+    font-size: 1.2rem;
+  }
+  .share-btn img {
+    width: 45px;
+    height: 45px;
+  }
+}
+</style>
+
+<script>
+const cardImg = document.querySelector(".business-card-img");
+if (cardImg) {
+  cardImg.addEventListener("click", function () {
+    const modal = document.createElement("div");
+    Object.assign(modal.style, {
+      position: "fixed",
+      top: "0",
+      left: "0",
+      width: "100vw",
+      height: "100vh",
+      backgroundColor: "rgba(0,0,0,0.8)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: "1000"
+    });
+
+    const img = document.createElement("img");
+    img.src = cardImg.src;
+    img.alt = cardImg.alt;
+    Object.assign(img.style, {
+      maxWidth: "90%",
+      maxHeight: "90%",
+      borderRadius: "10px",
+      boxShadow: "0 4px 8px rgba(0,0,0,0.5)",
+      cursor: "pointer"
+    });
+
+    modal.appendChild(img);
+    document.body.appendChild(modal);
+
+    modal.addEventListener("click", () => document.body.removeChild(modal));
+  });
+}
+</script>
 
 <!-- 分享按鈕區 -->
 <section id="share-buttons">
@@ -805,7 +866,7 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 #share-buttons h2 {
   font-size: 1.4rem;
-  margin-bottom: 15px;
+  margin-bottom: 17px;
 }
 .share-btns {
   display: flex;
@@ -822,16 +883,6 @@ document.addEventListener("DOMContentLoaded", () => {
   transform: scale(1.1);
 }
 
-/* 名片圖片響應式 */
-.business-card-img {
-  display: block;
-  max-width: 90%;
-  height: auto;
-  margin: 20px auto;
-  border-radius: 10px;
-  cursor: zoom-in;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
 
 /* 小螢幕調整 */
 @media (max-width: 600px) {
@@ -909,8 +960,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.removeChild(modal);
       });
     });
-  }
-});
+      ｝
 </script>
        
 
