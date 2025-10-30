@@ -931,87 +931,44 @@ function generateQRCode() {
   }
 });
 </script>
+    <style>
 
-   <section id="business-card">
-  <img src="image/未命名設計.png" 
-       alt="名片" 
-       class="business-card-img" 
-       loading="lazy">
-</section>
-
- 
-    
-<style>
-.business-card-img {
-    max-width: 500px; /* 限制名片圖片最大寬度 */
-    width: 100%; /* 確保圖片響應式縮放 */
-    height: auto;
-    margin-bottom: 20px;
-    border-radius: 10px; /* 圓角效果 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 陰影效果 */
-    cursor: pointer; /* 鼠標變為可點擊狀態 */
-    transition: transform 0.3s ease; /* 點擊縮放效果 */
+/* 🌸 名片燈箱 */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.25);
+}
+.close-btn {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  color: #fff;
+  font-size: 36px;
+  cursor: pointer;
+  font-weight: bold;
+  user-select: none;
 }
 
-.business-card-img:active {
-    transform: scale(1.05); /* 點擊時放大 */
-}
-
-/* 分享按鈕樣式 */
-#share-buttons {
-    text-align: center;
-    margin: 10px auto;
-}
-
-.share-btns {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.share-btn {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.share-btn img {
-    width: 100%;
-    height: auto;
-    border-radius: 50%; /* 圓形圖標 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 圖標陰影 */
-}
-
-.share-btn:hover {
-    transform: scale(1.1); /* 懸停時放大 */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 增強陰影 */
-}
-
-/* 響應式設計 */
+/* 🌸 響應式調整 */
 @media (max-width: 768px) {
-    .business-card-img {
-        max-width: 450px; /* 小螢幕上稍微縮小名片 */
-    }
-
-    .share-btn {
-        width: 40px; /* 小螢幕縮小按鈕尺寸 */
-        height: 40px;
-    }
+  #business-card-section { max-width: 450px; }
+  .share-btn { width: 40px; height: 40px; }
 }
-
 @media (max-width: 500px) {
-    .share-btns {
-        flex-wrap: wrap; /* 小螢幕按鈕換行 */
-    }
-
-    .business-card-img {
-        max-width: 380px; /* 手機螢幕上進一步縮小名片 */
-    }
+  #business-card-section { max-width: 380px; }
 }
-
 </style>
-    
     <style>
 :root {
     --primary-bg-color: #f9f9f9;
