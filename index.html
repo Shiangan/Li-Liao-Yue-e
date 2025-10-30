@@ -774,57 +774,129 @@ document.addEventListener("DOMContentLoaded", () => {
         
          
 
-<!-- 分享按鈕區 -->
-<section id="share-buttons">
-  <h2><strong>分享此頁面</strong></h2>
-  <div class="share-btns">
-    <!-- Facebook 分享按钮 -->
-    <a href="#"
-       target="_blank"
-       class="share-btn fb-share-btn"
-       aria-label="Share on Facebook">
-      <img src="image/fb.png" alt="Share on Facebook" loading="lazy">
+<!-- 📤 分享此頁面 -->
+<section id="share-section" class="share-section">
+  <h2>📤 分享此頁面</h2>
+  <div class="share-buttons">
+    <!-- Facebook -->
+    <a href="#" class="share-btn" onclick="shareToFacebook()" aria-label="分享到 Facebook">
+      <img src="image/fb.png" alt="Facebook" loading="lazy">
     </a>
-    <!-- Line 分享按钮 -->
-    <a href="#"
-       target="_blank"
-       class="share-btn line-share-btn"
-       aria-label="Share on Line">
-      <img src="image/line.png" alt="Share on Line" loading="lazy">
+    <!-- LINE -->
+    <a href="#" class="share-btn" onclick="shareToLine()" aria-label="分享到 LINE">
+      <img src="image/line.png" alt="LINE" loading="lazy">
     </a>
+    <!-- 複製連結 -->
+    <button class="share-btn" onclick="copyLink()" aria-label="複製連結">
+      <img src="image/link.png" alt="複製連結" loading="lazy">
+    </button>
+
   </div>
 </section>
 
+<style>
+.share-section {
+  text-align: center;
+  padding: 60px 20px;
+  background: #faf9f8;
+  font-family: 'Iansui', 'Noto Serif TC', serif;
+}
+
+.share-section h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.share-btn {
+  background: #fff;
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.share-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.share-btn img {
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+
+.qr-container {
+  margin-top: 25px;
+}
+
+.qr-container canvas {
+  margin: 0 auto;
+  display: block;
+  border-radius: 10px;
+}
+
+.qr-container p {
+  margin-top: 10px;
+  color: #555;
+  font-size: 1rem;
+}
+</style>
+
+<!-- ✅ 分享功能 -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  // 取得目前網址
-  var url = new URL(window.location.href);
+function getCanonicalUrl() {
+  // 使用固定網址，轉換 punycode 為中文域名
+  return "https://24hour.台灣/Li-Liao-Yue-e/";
+}
 
-  // 刪除追蹤參數
-  url.searchParams.delete("fbclid");
-  url.searchParams.delete("utm_source");
-  url.searchParams.delete("utm_medium");
-  url.searchParams.delete("utm_campaign");
+function shareToFacebook() {
+  const url = encodeURIComponent(getCanonicalUrl());
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+}
 
-  // Punycode 處理
-  if (url.hostname.includes("xn--")) {
-    url.hostname = "24hour.台灣";
+function shareToLine() {
+  const url = encodeURIComponent(getCanonicalUrl());
+  const text = encodeURIComponent(document.title);
+  window.open(`https://line.me/R/msg/text/?${text}%0A${url}`, '_blank');
+}
+
+function copyLink() {
+  const link = getCanonicalUrl();
+  navigator.clipboard.writeText(link).then(() => {
+    alert('✅ 網址已複製，您可貼給親友分享。');
+  });
+}
+
+function toggleQRCode() {
+  const qr = document.getElementById('qrContainer');
+  if (qr.style.display === 'none') {
+    qr.style.display = 'block';
+    generateQRCode();
+  } else {
+    qr.style.display = 'none';
   }
+}
 
-  // 編碼 URL
-  var encodedUrl = encodeURIComponent(url.toString());
-
-  // Facebook 分享
-  var fbShareLink = document.querySelector(".fb-share-btn");
-  if (fbShareLink) {
-    fbShareLink.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodedUrl;
-  }
-
-  // LINE 分享
-  var lineShareLink = document.querySelector(".line-share-btn");
-  if (lineShareLink) {
-    lineShareLink.href = "https://line.me/R/msg/text/?" + encodedUrl;
-  }
+function generateQRCode() {
+  const canvas = document.getElementById('qrcode');
+  QRCode.toCanvas(canvas, getCanonicalUrl(), {
+    width: 160,
+    margin: 2,
+    color: { dark: '#333', light: '#ffffff' }
+  });
+}
 
   // 點擊名片圖片放大功能
   const cardImg = document.querySelector(".business-card-img");
